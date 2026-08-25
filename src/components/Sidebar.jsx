@@ -80,7 +80,7 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
 
   return (
     <aside
-      className={`h-full bg-[#131313] border-r border-[#272727] flex flex-col justify-between flex-shrink-0 select-none transition-all duration-300 z-30 ${
+      className={`h-full bg-[#131313] border-r border-[#272727] flex flex-col justify-between flex-shrink-0 select-none transition-all duration-300 ${
         isCollapsed ? "w-[77px] p-4 items-center" : "w-[270px] p-5"
       }`}
     >
