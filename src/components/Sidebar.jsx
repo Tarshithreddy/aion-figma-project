@@ -74,13 +74,13 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
   const handleLogoClick = () => {
     setActiveTab("Home");
     if (isCollapsed) {
-      setIsCollapsed(false); // Expands sidebar back to full width
+      setIsCollapsed(false);
     }
   };
 
   return (
     <aside
-      className={`h-full bg-[#131313] border-r border-[#272727] flex flex-col justify-between flex-shrink-0 select-none transition-all duration-300 ${
+      className={`h-full bg-[#131313] border-r border-[#272727] flex flex-col justify-between flex-shrink-0 select-none transition-all duration-300 z-30 ${
         isCollapsed ? "w-[77px] p-4 items-center" : "w-[270px] p-5"
       }`}
     >
@@ -88,22 +88,16 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
         {/* Top Header Row */}
         {isCollapsed ? (
           <div className="flex flex-col items-center mb-2">
-            {/* Morphing Logo Button: Normal shows Aion Spark, Hover shows Sidebar toggle icon */}
             <div
               onClick={handleLogoClick}
               className="cursor-pointer group relative flex items-center justify-center w-[40px] h-[36px] rounded-lg hover:bg-[#202020] transition-colors duration-150"
             >
-              {/* Default Spark Icon */}
               <div className="group-hover:hidden transition-all flex items-center justify-center">
                 <AionSparkMini className="w-[32px] h-[25px] object-contain" />
               </div>
-
-              {/* Hover Toggle Icon (Exact replacement on hover) */}
               <div className="hidden group-hover:flex text-[#A0A0A0] group-hover:text-white transition-all items-center justify-center">
                 <PanelLeft size={20} strokeWidth={1.75} />
               </div>
-
-              {/* Floating Tooltip */}
               <div className="absolute left-12 bg-[#E2E2E2] text-[#131313] font-medium text-[11px] px-3 py-1 rounded-[6px] shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50">
                 Open sidebar
               </div>
@@ -114,7 +108,6 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
             <div onClick={handleLogoClick} className="cursor-pointer">
               <AionLogo className="h-[25px] w-auto" />
             </div>
-            {/* Collapse sidebar button */}
             <button
               onClick={() => setIsCollapsed(true)}
               className="text-[#878787] hover:text-white transition p-1"
@@ -144,7 +137,7 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
         ) : (
           <button
             onClick={() => setActiveTab("Home")}
-            className="flex items-center justify-start gap-2.5 w-[229px] h-[36px] px-3 bg-[#7BC53C]/[0.12] text-white text-xs font-medium rounded-lg hover:bg-[#7BC53C]/[0.20] transition"
+            className="flex items-center justify-start gap-2.5 w-full max-w-[229px] h-[36px] px-3 bg-[#7BC53C]/[0.12] text-white text-xs font-medium rounded-lg hover:bg-[#7BC53C]/[0.20] transition"
           >
             <div className="flex items-center justify-center">
               <Plus size={15} strokeWidth={1.67} className="text-white" />
@@ -179,7 +172,7 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
                 >
                   <Icon />
                 </div>
-                {!isCollapsed && <span>{label}</span>}
+                {!isCollapsed && <span className="truncate">{label}</span>}
                 {isCollapsed && (
                   <div className="absolute left-12 bg-[#202020] text-white text-[11px] px-2.5 py-1 rounded shadow-lg border border-[#303030] whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50">
                     {label}
@@ -200,7 +193,7 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
               <ChevronDown size={14} strokeWidth={1.67} className="cursor-pointer text-[#878787]" />
             </div>
 
-            <div className="flex flex-col gap-0.5">
+            <div className="flex flex-col gap-0.5 overflow-hidden">
               {recentProjects.map((title, idx) => (
                 <button
                   key={idx}
@@ -225,17 +218,17 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
           </div>
         </div>
       ) : (
-        <div className="w-[229px] h-[56px] bg-[#171717] rounded-lg p-2.5 flex items-center justify-between border border-[#212121]">
+        <div className="w-full max-w-[229px] h-[56px] bg-[#171717] rounded-lg p-2.5 flex items-center justify-between border border-[#212121]">
           <div className="flex items-center gap-3">
             <div className="w-[36px] h-[36px] rounded-full bg-[#0D9AE9] text-white flex items-center justify-center font-bold text-xs">
               VD
             </div>
-            <div className="flex flex-col justify-center">
-              <span className="text-white text-xs font-medium leading-tight">Vasu dev</span>
+            <div className="flex flex-col justify-center truncate">
+              <span className="text-white text-xs font-medium leading-tight truncate">Vasu dev</span>
               <span className="text-[#7B7B7B] text-[11px] leading-tight">Free</span>
             </div>
           </div>
-          <button className="text-[#A0A0A0] hover:text-white transition p-1 mr-1">
+          <button className="text-[#A0A0A0] hover:text-white transition p-1 mr-1 flex-shrink-0">
             <ExternalLink size={16} strokeWidth={1.67} />
           </button>
         </div>
