@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronDown, PanelLeft, ExternalLink, Plus } from "lucide-react";
+import { ChevronDown, PanelLeft, Plus, User } from "lucide-react";
 import AionLogo from "./AionLogo";
 import AionSparkMini from "./AionSparkMini";
 
@@ -207,29 +207,19 @@ export default function Sidebar({ activeTab, setActiveTab, isCollapsed, setIsCol
         )}
       </div>
 
-      {/* User Profile Footer Card */}
+      {/* Logged-out Sign In Footer Button (Matching Gemini style) */}
       {isCollapsed ? (
-        <div className="w-[36px] h-[31.5px] bg-[#171717] rounded-[4.5px] flex items-center justify-center cursor-pointer group relative">
-          <div className="w-[20.25px] h-[20.25px] rounded-full bg-[#0D9AE9] text-white flex items-center justify-center font-bold text-[9px]">
-            VD
-          </div>
+        <div className="w-[36px] h-[36px] bg-[#1a1a1a] hover:bg-[#252525] rounded-[8px] flex items-center justify-center cursor-pointer group relative text-[#A0A0A0] hover:text-white transition">
+          <User size={18} strokeWidth={1.8} />
           <div className="absolute left-12 bg-[#202020] text-white text-[11px] px-2.5 py-1 rounded shadow-lg border border-[#303030] whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 z-50">
-            Vasu dev (Free)
+            Sign in
           </div>
         </div>
       ) : (
-        <div className="w-full max-w-[229px] h-[56px] bg-[#171717] rounded-lg p-2.5 flex items-center justify-between border border-[#212121]">
-          <div className="flex items-center gap-3">
-            <div className="w-[36px] h-[36px] rounded-full bg-[#0D9AE9] text-white flex items-center justify-center font-bold text-xs">
-              VD
-            </div>
-            <div className="flex flex-col justify-center truncate">
-              <span className="text-white text-xs font-medium leading-tight truncate">Vasu dev</span>
-              <span className="text-[#7B7B7B] text-[11px] leading-tight">Free</span>
-            </div>
-          </div>
-          <button className="text-[#A0A0A0] hover:text-white transition p-1 mr-1 flex-shrink-0">
-            <ExternalLink size={16} strokeWidth={1.67} />
+        <div className="w-full">
+          <button className="w-full h-[38px] bg-[#222222] hover:bg-[#2c2c2c] text-white text-xs font-medium rounded-lg flex items-center justify-center gap-2 transition border border-[#2f2f2f]">
+            <User size={15} strokeWidth={1.8} />
+            <span>Sign in</span>
           </button>
         </div>
       )}

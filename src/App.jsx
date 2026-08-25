@@ -14,12 +14,12 @@ import Library from "./components/Library";
 export default function App() {
   const [activeTab, setActiveTab] = useState("Home");
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false); // Mobile drawer state
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [prompt, setPrompt] = useState("");
 
   return (
     <div className="flex h-screen w-screen bg-[#161616] text-[#9ca3af] font-sans antialiased overflow-hidden relative">
-      {/* Mobile Backdrop Overlay when drawer is open */}
+      {/* Mobile Backdrop Overlay */}
       {isMobileOpen && (
         <div 
           onClick={() => setIsMobileOpen(false)} 
@@ -27,7 +27,7 @@ export default function App() {
         />
       )}
 
-      {/* 1. Left Sidebar Navigation (Responsive Drawer / Collapsible Rail) */}
+      {/* 1. Left Sidebar Navigation */}
       <div
         className={`fixed md:relative inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out ${
           isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
@@ -37,17 +37,16 @@ export default function App() {
           activeTab={activeTab} 
           setActiveTab={(tab) => {
             setActiveTab(tab);
-            setIsMobileOpen(false); // Close drawer on mobile when navigating
+            setIsMobileOpen(false);
           }} 
           isCollapsed={isCollapsed} 
           setIsCollapsed={setIsCollapsed} 
         />
       </div>
 
-      {/* 2. Main Content Router / View Controller */}
+      {/* 2. Main Content Router */}
       {activeTab === "Library" ? (
         <div className="flex-1 flex flex-col h-full overflow-hidden">
-          {/* Mobile Header Bar with Hamburger */}
           <div className="md:hidden flex items-center p-4 bg-[#131313] border-b border-[#272727]">
             <button
               onClick={() => setIsMobileOpen(true)}
@@ -61,33 +60,40 @@ export default function App() {
         </div>
       ) : (
         <main className="flex-1 flex flex-col justify-between h-full bg-[#161616] relative overflow-y-auto px-4 sm:px-8">
-          {/* Mobile Header Bar with Hamburger */}
-          <div className="md:hidden flex items-center pt-4">
-            <button
-              onClick={() => setIsMobileOpen(true)}
-              className="text-[#A0A0A0] hover:text-white p-2 bg-[#202020] rounded-lg border border-[#2f2f2f]"
-            >
-              <Menu size={20} />
-            </button>
-          </div>
+          
+          {/* Top Header Bar */}
+          <header className="w-full flex items-center justify-between pt-5 px-4 z-20">
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setIsMobileOpen(true)}
+                className="text-[#A0A0A0] hover:text-white p-2 bg-[#202020] rounded-lg border border-[#2f2f2f]"
+              >
+                <Menu size={20} />
+              </button>
+            </div>
 
-          {/* Top Header Pill */}
-          <header className="w-full flex justify-center pt-4 md:pt-6">
-            <div className="w-[148px] h-[38px] bg-[#0F0F0F] rounded-[6px] text-xs text-[#9F9F9F] flex items-center justify-center gap-1.5 font-medium border border-[#1d1d1d]">
-              <span>Free plan .</span>
-              <a href="#" className="underline text-[#9F9F9F] hover:text-white transition">
-                Upgrade
-              </a>
+            <div className="hidden md:block"></div>
+
+            {/* Right Top Links & Sign In Button */}
+            <div className="flex items-center gap-6 ml-auto text-xs font-medium text-[#A0A0A0]">
+              <a href="#" className="hidden sm:block hover:text-white transition">About Aion</a>
+              <a href="#" className="hidden sm:block hover:text-white transition">Get App</a>
+              <a href="#" className="hidden lg:block hover:text-white transition">Subscriptions</a>
+              <a href="#" className="hidden lg:block hover:text-white transition">For Business</a>
+              <button className="h-[34px] px-4 bg-[#7BC53C] hover:bg-[#6ab330] text-black font-semibold text-xs rounded-full transition shadow-sm">
+                Sign in
+              </button>
             </div>
           </header>
 
           {/* Center Workspace Builder */}
           <div className="flex flex-col items-center justify-center w-full max-w-[886px] mx-auto my-auto py-6">
-            {/* Title Header with Brand Spark Mark */}
+            
+            {/* Main Hero Heading (Cleaned up from hardcoded user name to general welcome style) */}
             <div className="flex flex-wrap items-center justify-center gap-3.5 mb-7 text-center">
               <AionSpark className="w-[36px] sm:w-[40.4px] h-[28px] sm:h-[30.7px] flex-shrink-0" />
               <h1 className="text-xl sm:text-[28px] font-bold text-white tracking-tight">
-                Hey vasudev let's build
+                Let's build something amazing
               </h1>
             </div>
 
@@ -116,7 +122,7 @@ export default function App() {
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe about the screen you have uploaded....."
                   rows={3}
-                  className="w-full bg-transparent text-xs text-white placeholder-[#5F5F5F] outline-none resize-none leading-relaxed"
+                  className="w-full bg-transparent text-xs sm:text-sm text-white placeholder-[#5F5F5F] outline-none resize-none leading-relaxed"
                 />
 
                 {/* Action Toolbar */}
@@ -140,8 +146,12 @@ export default function App() {
             </div>
           </div>
 
-          {/* Bottom Spacer */}
-          <div className="h-6" />
+          {/* Bottom Footer Disclaimers */}
+          <footer className="w-full text-center pb-4 text-[11px] text-[#7A7A7A]">
+            <p>
+              Aion AI can make mistakes. Please verify critical design code.
+            </p>
+          </footer>
         </main>
       )}
     </div>
